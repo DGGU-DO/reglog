@@ -1,4 +1,4 @@
-*
+*Revisión de log
 
 
 recode pobreza (1/2 = 1) (3 = 0), gen(pp_monetaria)
