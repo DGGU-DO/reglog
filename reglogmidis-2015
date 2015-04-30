@@ -1,0 +1,42 @@
+*
+
+
+recode pobreza (1/2 = 1) (3 = 0), gen(pp_monetaria)
+
+egen b_bien=rowtotal(`bienes')
+egen b_biendur=rowtotal(b2_i b6_i b5_i b9_i b10_i b11_i)
+egen b_bienel=rowtotal(b4_i b5_i b8_i b11_i)
+egen b_bientelec=rowtotal(b12 b13 b7 b14)
+
+gen b_bien_per=b_bien/mieperho 
+
+
+*Bienes
+logit pp_monetaria i.b4_i i.b8_i b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 1 [iweight=factor07]
+logit pp_monetaria i.b4_i i.b5_i i.b6_i b_bien b_biendur b_bienel b_bien_per if domrural == 2 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 3 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel  b_bien_per if domrural == 4 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 5 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bien_per if domrural == 6 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 7 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel  b_bien_per if domrural == 8 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 9 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel  b_bien_per if domrural == 10 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 11 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel  b_bien_per if domrural == 12 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 13 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel  b_bien_per if domrural == 14 [iweight=factor07]
+logit pp_monetaria b_bien b_biendur b_bienel b_bientelec b_bien_per if domrural == 15 [iweight=factor07]
+
+gen hacina=mieperho/p104
+gen tab v4_i, gen(techo)
+
+*Vivienda
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==1 [iweight=factor07]
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==3 [iweight=factor07]
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==5 [iweight=factor07]
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==7 [iweight=factor07]
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==9 [iweight=factor07]
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==11 [iweight=factor07]
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==13 [iweight=factor07]
+logit pp_monetaria hacina i.comb4 i.comb5 i.techo1 i.piso6 if domrural==15 [iweight=factor07]
